@@ -7,7 +7,6 @@
     <AutoCreateAndUpdateDSDPhoneLayouts />
     <IntuitiveSorting />
     <IntuitiveSorting_SP2 />
-    <MapboxVectorStylesAndLayers />
     <MarkAnimation />
     <ObjectModelEncapsulateLegacy />
     <ObjectModelTableType />
@@ -20,9 +19,6 @@
     <preference name='ui.encoding.shelf.height' value='24' />
     <preference name='ui.shelf.height' value='26' />
   </preferences>
-  <mapsources>
-    <mapsource name='Tableau' />
-  </mapsources>
   <datasources>
     <datasource caption='Cybersecurity Threat Intelligence' inline='true' name='federated.threat_intel_datasource' version='18.1'>
       <connection class='federated'>
@@ -342,78 +338,41 @@
   <actions />
 
   <worksheets>
-    <!-- WORKSHEET 1: Global Cyber Attack Map (Dark Map) -->
-    <worksheet name='Global Cyber Attack Map'>
-      <layout-options>
-        <title>
-          <formatted-text>
-            <run bold='true' fontcolor='#f8fafc' fontsize='13'>GLOBAL CYBER ATTACK MAP (GEOPOLITICAL THREAT DENSITY)</run>
-          </formatted-text>
-        </title>
-      </layout-options>
+    <!-- WORKSHEET 1: Target Countries Threat Exposure -->
+    <worksheet name='Target Countries Threat Exposure'>
       <table>
         <view>
           <datasources>
             <datasource caption='Cybersecurity Threat Intelligence' name='federated.threat_intel_datasource' />
           </datasources>
           <datasource-dependencies datasource='federated.threat_intel_datasource'>
-            <column datatype='string' name='[Target_Country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column datatype='string' name='[Target_Country]' role='dimension' type='nominal' />
             <column datatype='string' name='[Incident_ID]' role='dimension' type='nominal' />
-            <column datatype='real' name='[CVSS_Score]' role='measure' type='quantitative' />
             <column-instance column='[Target_Country]' derivation='None' name='[none:Target_Country:nk]' pivot='key' type='nominal' />
             <column-instance column='[Incident_ID]' derivation='Count' name='[cnt:Incident_ID:qk]' pivot='key' type='quantitative' />
-            <column-instance column='[CVSS_Score]' derivation='Avg' name='[avg:CVSS_Score:qk]' pivot='key' type='quantitative' />
           </datasource-dependencies>
           <aggregation value='true' />
         </view>
-        <style>
-          <style-rule element='worksheet'>
-            <format attr='background-color' value='#090d16' />
-          </style-rule>
-          <style-rule element='map'>
-            <format attr='map-style' value='dark' />
-            <format attr='washout' value='0.0' />
-          </style-rule>
-          <style-rule element='mark'>
-            <encoding attr='color' field='[federated.threat_intel_datasource].[avg:CVSS_Score:qk]' palette='red_blue_diverging_10_0' type='interpolated' />
-          </style-rule>
-        </style>
+        <style />
         <panes>
-          <pane id='1' selection-relaxation-option='selection-relaxation-allow'>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
             <view>
               <breakdown value='auto' />
             </view>
-            <mark class='Multipolygon' />
+            <mark class='Bar' />
             <encodings>
-              <color column='[federated.threat_intel_datasource].[avg:CVSS_Score:qk]' />
-              <lod column='[federated.threat_intel_datasource].[none:Target_Country:nk]' />
-              <tooltip column='[federated.threat_intel_datasource].[cnt:Incident_ID:qk]' />
-              <geometry column='[federated.threat_intel_datasource].[Geometry (generated)]' />
+              <color column='[federated.threat_intel_datasource].[cnt:Incident_ID:qk]' />
             </encodings>
-            <style>
-              <style-rule element='mark'>
-                <format attr='mark-transparency' value='225' />
-                <format attr='has-stroke' value='true' />
-                <format attr='stroke-color' value='#38bdf8' />
-              </style-rule>
-            </style>
           </pane>
         </panes>
-        <rows>[federated.threat_intel_datasource].[Latitude (generated)]</rows>
-        <cols>[federated.threat_intel_datasource].[Longitude (generated)]</cols>
+        <rows>[federated.threat_intel_datasource].[none:Target_Country:nk]</rows>
+        <cols>[federated.threat_intel_datasource].[cnt:Incident_ID:qk]</cols>
       </table>
       <simple-id uuid='{71C80B0F-0210-4A0F-970B-1E2E4DF85429}' />
     </worksheet>
 
     <!-- WORKSHEET 2: Active Threat Campaign Profiles -->
     <worksheet name='Active Threat Campaign Profiles'>
-      <layout-options>
-        <title>
-          <formatted-text>
-            <run bold='true' fontcolor='#f8fafc' fontsize='13'>ACTIVE THREAT CAMPAIGNS &amp; APTS</run>
-          </formatted-text>
-        </title>
-      </layout-options>
       <table>
         <view>
           <datasources>
@@ -430,15 +389,6 @@
           <aggregation value='true' />
         </view>
         <style>
-          <style-rule element='worksheet'>
-            <format attr='background-color' value='#090d16' />
-          </style-rule>
-          <style-rule element='cell'>
-            <format attr='font-color' value='#f1f5f9' />
-          </style-rule>
-          <style-rule element='header'>
-            <format attr='font-color' value='#94a3b8' />
-          </style-rule>
           <style-rule element='mark'>
             <encoding attr='color' field='[federated.threat_intel_datasource].[none:Severity:nk]' type='palette'>
               <map to='#ef4444'>
@@ -464,7 +414,6 @@
             <mark class='Bar' />
             <encodings>
               <color column='[federated.threat_intel_datasource].[none:Severity:nk]' />
-              <tooltip column='[federated.threat_intel_datasource].[cnt:Incident_ID:qk]' />
             </encodings>
           </pane>
         </panes>
@@ -476,13 +425,6 @@
 
     <!-- WORKSHEET 3: Cross-Border Sector Impact -->
     <worksheet name='Cross-Border Sector Impact'>
-      <layout-options>
-        <title>
-          <formatted-text>
-            <run bold='true' fontcolor='#f8fafc' fontsize='12'>CROSS-BORDER SECTOR IMPACT ($ LOSS)</run>
-          </formatted-text>
-        </title>
-      </layout-options>
       <table>
         <view>
           <datasources>
@@ -496,17 +438,7 @@
           </datasource-dependencies>
           <aggregation value='true' />
         </view>
-        <style>
-          <style-rule element='worksheet'>
-            <format attr='background-color' value='#090d16' />
-          </style-rule>
-          <style-rule element='cell'>
-            <format attr='font-color' value='#f1f5f9' />
-          </style-rule>
-          <style-rule element='header'>
-            <format attr='font-color' value='#94a3b8' />
-          </style-rule>
-        </style>
+        <style />
         <panes>
           <pane selection-relaxation-option='selection-relaxation-allow'>
             <view>
@@ -515,7 +447,6 @@
             <mark class='Bar' />
             <encodings>
               <color column='[federated.threat_intel_datasource].[sum:Financial_Impact_USD:qk]' />
-              <tooltip column='[federated.threat_intel_datasource].[sum:Financial_Impact_USD:qk]' />
             </encodings>
           </pane>
         </panes>
@@ -527,13 +458,6 @@
 
     <!-- WORKSHEET 4: Top Exploited Vectors -->
     <worksheet name='Top Exploited Vectors'>
-      <layout-options>
-        <title>
-          <formatted-text>
-            <run bold='true' fontcolor='#f8fafc' fontsize='12'>TOP EXPLOITED INFILTRATION VECTORS</run>
-          </formatted-text>
-        </title>
-      </layout-options>
       <table>
         <view>
           <datasources>
@@ -547,17 +471,7 @@
           </datasource-dependencies>
           <aggregation value='true' />
         </view>
-        <style>
-          <style-rule element='worksheet'>
-            <format attr='background-color' value='#090d16' />
-          </style-rule>
-          <style-rule element='cell'>
-            <format attr='font-color' value='#f1f5f9' />
-          </style-rule>
-          <style-rule element='header'>
-            <format attr='font-color' value='#94a3b8' />
-          </style-rule>
-        </style>
+        <style />
         <panes>
           <pane selection-relaxation-option='selection-relaxation-allow'>
             <view>
@@ -566,7 +480,6 @@
             <mark class='Bar' />
             <encodings>
               <color column='[federated.threat_intel_datasource].[cnt:Incident_ID:qk]' />
-              <tooltip column='[federated.threat_intel_datasource].[cnt:Incident_ID:qk]' />
             </encodings>
           </pane>
         </panes>
@@ -578,13 +491,6 @@
 
     <!-- WORKSHEET 5: Adversary Country Attribution -->
     <worksheet name='Adversary Country Attribution'>
-      <layout-options>
-        <title>
-          <formatted-text>
-            <run bold='true' fontcolor='#f8fafc' fontsize='12'>ADVERSARY ORIGIN ATTRIBUTION</run>
-          </formatted-text>
-        </title>
-      </layout-options>
       <table>
         <view>
           <datasources>
@@ -598,17 +504,7 @@
           </datasource-dependencies>
           <aggregation value='true' />
         </view>
-        <style>
-          <style-rule element='worksheet'>
-            <format attr='background-color' value='#090d16' />
-          </style-rule>
-          <style-rule element='cell'>
-            <format attr='font-color' value='#f1f5f9' />
-          </style-rule>
-          <style-rule element='header'>
-            <format attr='font-color' value='#94a3b8' />
-          </style-rule>
-        </style>
+        <style />
         <panes>
           <pane selection-relaxation-option='selection-relaxation-allow'>
             <view>
@@ -617,7 +513,6 @@
             <mark class='Bar' />
             <encodings>
               <color column='[federated.threat_intel_datasource].[none:Origin_Country:nk]' />
-              <tooltip column='[federated.threat_intel_datasource].[cnt:Incident_ID:qk]' />
             </encodings>
           </pane>
         </panes>
@@ -630,18 +525,7 @@
 
   <dashboards>
     <dashboard _.fcp.AccessibleZoneTabOrder.true...enable-sort-zone-taborder='true' name='GLOBAL CYBER THREAT INTELLIGENCE'>
-      <layout-options>
-        <title>
-          <formatted-text>
-            <run bold='true' fontcolor='#ffffff' fontsize='15'>🌐 GLOBAL CYBER THREAT CAMPAIGNS &amp; GEOPOLITICAL INTELLIGENCE</run>
-          </formatted-text>
-        </title>
-      </layout-options>
-      <style>
-        <style-rule element='dashboard'>
-          <format attr='background-color' value='#090d16' />
-        </style-rule>
-      </style>
+      <style />
       <size sizing-mode='automatic' />
       <zones>
         <zone h='100000' id='4' type-v2='layout-basic' w='100000' x='0' y='0'>
@@ -649,50 +533,45 @@
             <zone h='98044' id='19' param='vert' type-v2='layout-flow' w='98836' x='582' y='978'>
               <zone h='98044' id='16' param='horz' type-v2='layout-flow' w='98836' x='582' y='978'>
                 <zone h='98044' id='14' type-v2='layout-basic' w='98836' x='582' y='978'>
-                  <!-- Upper Tier: Hero Map (60%) & Campaign Cards (40%) -->
-                  <zone h='52000' id='3' name='Global Cyber Attack Map' w='60000' x='582' y='978'>
+                  <!-- Upper Tier: Target Countries & Active Campaigns -->
+                  <zone h='48000' id='3' name='Target Countries Threat Exposure' w='50345' x='582' y='978'>
                     <zone-style>
-                      <format attr='border-color' value='#1e293b' />
-                      <format attr='border-style' value='solid' />
-                      <format attr='border-width' value='1' />
-                      <format attr='background-color' value='#090d16' />
+                      <format attr='border-color' value='#000000' />
+                      <format attr='border-style' value='none' />
+                      <format attr='border-width' value='0' />
                       <format attr='margin' value='4' />
                     </zone-style>
                   </zone>
-                  <zone h='52000' id='5' name='Active Threat Campaign Profiles' w='38836' x='60582' y='978'>
+                  <zone h='48000' id='5' name='Active Threat Campaign Profiles' w='48491' x='50927' y='978'>
                     <zone-style>
-                      <format attr='border-color' value='#1e293b' />
-                      <format attr='border-style' value='solid' />
-                      <format attr='border-width' value='1' />
-                      <format attr='background-color' value='#090d16' />
+                      <format attr='border-color' value='#000000' />
+                      <format attr='border-style' value='none' />
+                      <format attr='border-width' value='0' />
                       <format attr='margin' value='4' />
                     </zone-style>
                   </zone>
                   <!-- Lower Tier: Cross-Border Sector, Top Exploited Vectors, Origin Attribution -->
-                  <zone h='46000' id='6' name='Cross-Border Sector Impact' w='34000' x='582' y='53000'>
+                  <zone h='50000' id='6' name='Cross-Border Sector Impact' w='38000' x='582' y='49000'>
                     <zone-style>
-                      <format attr='border-color' value='#1e293b' />
-                      <format attr='border-style' value='solid' />
-                      <format attr='border-width' value='1' />
-                      <format attr='background-color' value='#090d16' />
+                      <format attr='border-color' value='#000000' />
+                      <format attr='border-style' value='none' />
+                      <format attr='border-width' value='0' />
                       <format attr='margin' value='4' />
                     </zone-style>
                   </zone>
-                  <zone h='46000' id='7' name='Top Exploited Vectors' w='34000' x='34582' y='53000'>
+                  <zone h='50000' id='7' name='Top Exploited Vectors' w='34000' x='38582' y='49000'>
                     <zone-style>
-                      <format attr='border-color' value='#1e293b' />
-                      <format attr='border-style' value='solid' />
-                      <format attr='border-width' value='1' />
-                      <format attr='background-color' value='#090d16' />
+                      <format attr='border-color' value='#000000' />
+                      <format attr='border-style' value='none' />
+                      <format attr='border-width' value='0' />
                       <format attr='margin' value='4' />
                     </zone-style>
                   </zone>
-                  <zone h='46000' id='8' name='Adversary Country Attribution' w='30836' x='68582' y='53000'>
+                  <zone h='50000' id='8' name='Adversary Country Attribution' w='26836' x='72582' y='49000'>
                     <zone-style>
-                      <format attr='border-color' value='#1e293b' />
-                      <format attr='border-style' value='solid' />
-                      <format attr='border-width' value='1' />
-                      <format attr='background-color' value='#090d16' />
+                      <format attr='border-color' value='#000000' />
+                      <format attr='border-style' value='none' />
+                      <format attr='border-width' value='0' />
                       <format attr='margin' value='4' />
                     </zone-style>
                   </zone>
@@ -701,11 +580,10 @@
             </zone>
           </zone>
           <zone-style>
-            <format attr='border-color' value='#090d16' />
-            <format attr='border-style' value='solid' />
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='none' />
             <format attr='border-width' value='0' />
-            <format attr='background-color' value='#090d16' />
-            <format attr='margin' value='6' />
+            <format attr='margin' value='8' />
           </zone-style>
         </zone>
       </zones>
@@ -714,7 +592,7 @@
   </dashboards>
 
   <windows saved-dpi-scale-factor='1.5' source-height='44'>
-    <window class='worksheet' name='Global Cyber Attack Map'>
+    <window class='worksheet' name='Target Countries Threat Exposure'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -735,9 +613,6 @@
           </strip>
         </edge>
       </cards>
-      <viewpoint>
-        <zoom type='entire-view' />
-      </viewpoint>
       <simple-id uuid='{31AE71D1-2139-4C91-BBDF-308105740C4A}' />
     </window>
     <window class='worksheet' name='Active Threat Campaign Profiles'>
@@ -841,7 +716,7 @@
     </window>
     <window class='dashboard' maximized='true' name='GLOBAL CYBER THREAT INTELLIGENCE'>
       <viewpoints>
-        <viewpoint name='Global Cyber Attack Map'>
+        <viewpoint name='Target Countries Threat Exposure'>
           <zoom type='entire-view' />
         </viewpoint>
         <viewpoint name='Active Threat Campaign Profiles'>
