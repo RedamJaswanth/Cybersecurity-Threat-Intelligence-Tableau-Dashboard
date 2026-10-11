@@ -1,0 +1,789 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- build 20262.26.0912.1023                               -->
+<workbook original-version='18.1' source-build='2026.2.3 (20262.26.0912.1023)' source-platform='win' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <AccessibleZoneTabOrder />
+    <AnimationOnByDefault />
+    <AutoCreateAndUpdateDSDPhoneLayouts />
+    <IntuitiveSorting />
+    <IntuitiveSorting_SP2 />
+    <MarkAnimation />
+    <ObjectModelEncapsulateLegacy />
+    <ObjectModelTableType />
+    <SchemaViewerObjectModel />
+    <SetMembershipControl />
+    <SheetIdentifierTracking />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='Cybersecurity Threat Intelligence' inline='true' name='federated.threat_intel_datasource' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='cybersecurity_threat_intelligence' name='textscan.threat_intel_conn'>
+            <connection class='textscan' directory='.' filename='cybersecurity_threat_intelligence.csv' password='' server='' />
+          </named-connection>
+        </named-connections>
+        <relation connection='textscan.threat_intel_conn' name='cybersecurity_threat_intelligence.csv' table='[cybersecurity_threat_intelligence#csv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+            <column datatype='string' name='Incident_ID' ordinal='0' />
+            <column datatype='datetime' name='Timestamp' ordinal='1' />
+            <column datatype='date' name='Date' ordinal='2' />
+            <column datatype='string' name='Threat_Actor' ordinal='3' />
+            <column datatype='string' name='Threat_Actor_Type' ordinal='4' />
+            <column datatype='string' name='Origin_Country' ordinal='5' />
+            <column datatype='string' name='Target_Country' ordinal='6' />
+            <column datatype='string' name='Target_Industry' ordinal='7' />
+            <column datatype='string' name='Attack_Vector' ordinal='8' />
+            <column datatype='string' name='MITRE_Tactic' ordinal='9' />
+            <column datatype='string' name='MITRE_Technique_ID' ordinal='10' />
+            <column datatype='string' name='MITRE_Technique_Name' ordinal='11' />
+            <column datatype='string' name='Malware_Family' ordinal='12' />
+            <column datatype='string' name='Severity' ordinal='13' />
+            <column datatype='real' name='CVSS_Score' ordinal='14' />
+            <column datatype='string' name='IOC_Type' ordinal='15' />
+            <column datatype='string' name='IOC_Value' ordinal='16' />
+            <column datatype='real' name='MTTD_Hours' ordinal='17' />
+            <column datatype='real' name='MTTR_Hours' ordinal='18' />
+            <column datatype='string' name='Incident_Status' ordinal='19' />
+            <column datatype='integer' name='Financial_Impact_USD' ordinal='20' />
+            <column datatype='string' name='Confidence_Score' ordinal='21' />
+            <column datatype='string' name='TLP_Marking' ordinal='22' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[cybersecurity_threat_intelligence.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Incident_ID</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Incident_ID]</local-name>
+            <parent-name>[cybersecurity_threat_intelligence.csv]</parent-name>
+            <remote-alias>Incident_ID</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Timestamp</remote-name>
+            <remote-type>135</remote-type>
+            <local-name>[Timestamp]</local-name>
+            <parent-name>[cybersecurity_threat_intelligence.csv]</parent-name>
+            <remote-alias>Timestamp</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>datetime</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Date</remote-name>
+            <remote-type>133</remote-type>
+            <local-name>[Date]</local-name>
+            <parent-name>[cybersecurity_threat_intelligence.csv]</parent-name>
+            <remote-alias>Date</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Threat_Actor</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Threat_Actor]</local-name>
+            <parent-name>[cybersecurity_threat_intelligence.csv]</parent-name>
+            <remote-alias>Threat_Actor</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Threat_Actor_Type</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Threat_Actor_Type]</local-name>
+            <parent-name>[cybersecurity_threat_intelligence.csv]</parent-name>
+            <remote-alias>Threat_Actor_Type</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Origin_Country</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Origin_Country]</local-name>
+            <parent-name>[cybersecurity_threat_intelligence.csv]</parent-name>
+            <remote-alias>Origin_Country</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Target_Country</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Target_Country]</local-name>
+            <parent-name>[cybersecurity_threat_intelligence.csv]</parent-name>
+            <remote-alias>Target_Country</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Target_Industry</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Target_Industry]</local-name>
+            <parent-name>[cybersecurity_threat_intelligence.csv]</parent-name>
+            <remote-alias>Target_Industry</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Attack_Vector</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Attack_Vector]</local-name>
+            <parent-name>[cybersecurity_threat_intelligence.csv]</parent-name>
+            <remote-alias>Attack_Vector</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>MITRE_Tactic</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[MITRE_Tactic]</local-name>
+            <parent-name>[cybersecurity_threat_intelligence.csv]</parent-name>
+            <remote-alias>MITRE_Tactic</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>MITRE_Technique_ID</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[MITRE_Technique_ID]</local-name>
+            <parent-name>[cybersecurity_threat_intelligence.csv]</parent-name>
+            <remote-alias>MITRE_Technique_ID</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>MITRE_Technique_Name</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[MITRE_Technique_Name]</local-name>
+            <parent-name>[cybersecurity_threat_intelligence.csv]</parent-name>
+            <remote-alias>MITRE_Technique_Name</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Malware_Family</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Malware_Family]</local-name>
+            <parent-name>[cybersecurity_threat_intelligence.csv]</parent-name>
+            <remote-alias>Malware_Family</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Severity</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Severity]</local-name>
+            <parent-name>[cybersecurity_threat_intelligence.csv]</parent-name>
+            <remote-alias>Severity</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>CVSS_Score</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[CVSS_Score]</local-name>
+            <parent-name>[cybersecurity_threat_intelligence.csv]</parent-name>
+            <remote-alias>CVSS_Score</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Average</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>IOC_Type</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[IOC_Type]</local-name>
+            <parent-name>[cybersecurity_threat_intelligence.csv]</parent-name>
+            <remote-alias>IOC_Type</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>IOC_Value</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[IOC_Value]</local-name>
+            <parent-name>[cybersecurity_threat_intelligence.csv]</parent-name>
+            <remote-alias>IOC_Value</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>MTTD_Hours</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[MTTD_Hours]</local-name>
+            <parent-name>[cybersecurity_threat_intelligence.csv]</parent-name>
+            <remote-alias>MTTD_Hours</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Average</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>MTTR_Hours</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[MTTR_Hours]</local-name>
+            <parent-name>[cybersecurity_threat_intelligence.csv]</parent-name>
+            <remote-alias>MTTR_Hours</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Average</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Incident_Status</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Incident_Status]</local-name>
+            <parent-name>[cybersecurity_threat_intelligence.csv]</parent-name>
+            <remote-alias>Incident_Status</remote-alias>
+            <ordinal>19</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Financial_Impact_USD</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Financial_Impact_USD]</local-name>
+            <parent-name>[cybersecurity_threat_intelligence.csv]</parent-name>
+            <remote-alias>Financial_Impact_USD</remote-alias>
+            <ordinal>20</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Confidence_Score</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Confidence_Score]</local-name>
+            <parent-name>[cybersecurity_threat_intelligence.csv]</parent-name>
+            <remote-alias>Confidence_Score</remote-alias>
+            <ordinal>21</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>TLP_Marking</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[TLP_Marking]</local-name>
+            <parent-name>[cybersecurity_threat_intelligence.csv]</parent-name>
+            <remote-alias>TLP_Marking</remote-alias>
+            <ordinal>22</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column datatype='string' name='[Target_Country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+      <column datatype='string' name='[Origin_Country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+      <column caption='Financial Impact ($)' datatype='integer' default-format='C1033$' name='[Financial_Impact_USD]' role='measure' type='quantitative' />
+      <column caption='CVSS Score' datatype='real' default-format='n#,##0.0' name='[CVSS_Score]' role='measure' type='quantitative' />
+      <column caption='MTTD (Hours)' datatype='real' default-format='n#,##0.0' name='[MTTD_Hours]' role='measure' type='quantitative' />
+      <column caption='MTTR (Hours)' datatype='real' default-format='n#,##0.0' name='[MTTR_Hours]' role='measure' type='quantitative' />
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+    </datasource>
+  </datasources>
+
+  <actions />
+
+  <worksheets>
+    <!-- WORKSHEET 1: Target Countries Threat Exposure -->
+    <worksheet name='Target Countries Threat Exposure'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontcolor='#0f172a' fontsize='12'>Target Countries Geopolitical Threat Exposure</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Cybersecurity Threat Intelligence' name='federated.threat_intel_datasource' />
+          </datasources>
+          <datasource-dependencies datasource='federated.threat_intel_datasource'>
+            <column datatype='string' name='[Target_Country]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Incident_ID]' role='dimension' type='nominal' />
+            <column datatype='real' name='[CVSS_Score]' role='measure' type='quantitative' />
+            <column-instance column='[Target_Country]' derivation='None' name='[none:Target_Country:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Incident_ID]' derivation='Count' name='[cnt:Incident_ID:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[CVSS_Score]' derivation='Avg' name='[avg:CVSS_Score:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <encodings>
+              <color column='[federated.threat_intel_datasource].[avg:CVSS_Score:qk]' />
+              <tooltip column='[federated.threat_intel_datasource].[cnt:Incident_ID:qk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.threat_intel_datasource].[none:Target_Country:nk]</rows>
+        <cols>[federated.threat_intel_datasource].[cnt:Incident_ID:qk]</cols>
+      </table>
+      <simple-id uuid='{71C80B0F-0210-4A0F-970B-1E2E4DF85429}' />
+    </worksheet>
+
+    <!-- WORKSHEET 2: Active Nation-State Threat Campaigns -->
+    <worksheet name='Active Nation-State Threat Campaigns'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontcolor='#0f172a' fontsize='12'>Active Threat Actors &amp; APT Campaigns (by Severity)</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Cybersecurity Threat Intelligence' name='federated.threat_intel_datasource' />
+          </datasources>
+          <datasource-dependencies datasource='federated.threat_intel_datasource'>
+            <column datatype='string' name='[Threat_Actor]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Severity]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Incident_ID]' role='dimension' type='nominal' />
+            <column-instance column='[Threat_Actor]' derivation='None' name='[none:Threat_Actor:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Severity]' derivation='None' name='[none:Severity:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Incident_ID]' derivation='Count' name='[cnt:Incident_ID:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='mark'>
+            <encoding attr='color' field='[federated.threat_intel_datasource].[none:Severity:nk]' type='palette'>
+              <map to='#e15759'>
+                <bucket>&quot;Critical&quot;</bucket>
+              </map>
+              <map to='#f28e2b'>
+                <bucket>&quot;High&quot;</bucket>
+              </map>
+              <map to='#edc948'>
+                <bucket>&quot;Medium&quot;</bucket>
+              </map>
+              <map to='#59a14f'>
+                <bucket>&quot;Low&quot;</bucket>
+              </map>
+            </encoding>
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <encodings>
+              <color column='[federated.threat_intel_datasource].[none:Severity:nk]' />
+              <tooltip column='[federated.threat_intel_datasource].[cnt:Incident_ID:qk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.threat_intel_datasource].[none:Threat_Actor:nk]</rows>
+        <cols>[federated.threat_intel_datasource].[cnt:Incident_ID:qk]</cols>
+      </table>
+      <simple-id uuid='{3A183D55-081B-45CE-B91F-72BC5288B11B}' />
+    </worksheet>
+
+    <!-- WORKSHEET 3: Cross-Border Sector Vulnerability -->
+    <worksheet name='Cross-Border Sector Vulnerability'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontcolor='#0f172a' fontsize='12'>Cross-Border Sector Vulnerability &amp; Financial Impact ($)</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Cybersecurity Threat Intelligence' name='federated.threat_intel_datasource' />
+          </datasources>
+          <datasource-dependencies datasource='federated.threat_intel_datasource'>
+            <column datatype='string' name='[Target_Industry]' role='dimension' type='nominal' />
+            <column datatype='integer' name='[Financial_Impact_USD]' role='measure' type='quantitative' />
+            <column-instance column='[Target_Industry]' derivation='None' name='[none:Target_Industry:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Financial_Impact_USD]' derivation='Sum' name='[sum:Financial_Impact_USD:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <encodings>
+              <color column='[federated.threat_intel_datasource].[sum:Financial_Impact_USD:qk]' />
+              <tooltip column='[federated.threat_intel_datasource].[sum:Financial_Impact_USD:qk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.threat_intel_datasource].[none:Target_Industry:nk]</rows>
+        <cols>[federated.threat_intel_datasource].[sum:Financial_Impact_USD:qk]</cols>
+      </table>
+      <simple-id uuid='{99CA6899-73AA-4D30-8025-F25828D13F70}' />
+    </worksheet>
+
+    <!-- WORKSHEET 4: Geopolitical Attack Vectors -->
+    <worksheet name='Geopolitical Attack Vectors'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontcolor='#0f172a' fontsize='12'>Attack Vectors &amp; Initial Infiltration Exploits</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Cybersecurity Threat Intelligence' name='federated.threat_intel_datasource' />
+          </datasources>
+          <datasource-dependencies datasource='federated.threat_intel_datasource'>
+            <column datatype='string' name='[Attack_Vector]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Incident_ID]' role='dimension' type='nominal' />
+            <column-instance column='[Attack_Vector]' derivation='None' name='[none:Attack_Vector:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Incident_ID]' derivation='Count' name='[cnt:Incident_ID:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <encodings>
+              <color column='[federated.threat_intel_datasource].[cnt:Incident_ID:qk]' />
+              <tooltip column='[federated.threat_intel_datasource].[cnt:Incident_ID:qk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.threat_intel_datasource].[none:Attack_Vector:nk]</rows>
+        <cols>[federated.threat_intel_datasource].[cnt:Incident_ID:qk]</cols>
+      </table>
+      <simple-id uuid='{42DFE843-85E3-402F-9C80-5C4DCE4786AE}' />
+    </worksheet>
+
+    <!-- WORKSHEET 5: Threat Origin Nation-States -->
+    <worksheet name='Threat Origin Nation-States'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontcolor='#0f172a' fontsize='12'>Adversary Country of Origin Attribution</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Cybersecurity Threat Intelligence' name='federated.threat_intel_datasource' />
+          </datasources>
+          <datasource-dependencies datasource='federated.threat_intel_datasource'>
+            <column datatype='string' name='[Origin_Country]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Incident_ID]' role='dimension' type='nominal' />
+            <column-instance column='[Origin_Country]' derivation='None' name='[none:Origin_Country:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Incident_ID]' derivation='Count' name='[cnt:Incident_ID:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <encodings>
+              <color column='[federated.threat_intel_datasource].[none:Origin_Country:nk]' />
+              <tooltip column='[federated.threat_intel_datasource].[cnt:Incident_ID:qk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.threat_intel_datasource].[none:Origin_Country:nk]</rows>
+        <cols>[federated.threat_intel_datasource].[cnt:Incident_ID:qk]</cols>
+      </table>
+      <simple-id uuid='{1032338A-98C0-410F-B404-51CE11BB29D1}' />
+    </worksheet>
+  </worksheets>
+
+  <dashboards>
+    <dashboard _.fcp.AccessibleZoneTabOrder.true...enable-sort-zone-taborder='true' name='Global Cyber Threat Campaigns Dashboard'>
+      <style />
+      <size sizing-mode='automatic' />
+      <zones>
+        <zone h='100000' id='4' type-v2='layout-basic' w='100000' x='0' y='0'>
+          <zone h='98044' id='21' param='vert' type-v2='layout-flow' w='98836' x='582' y='978'>
+            <zone h='98044' id='19' param='vert' type-v2='layout-flow' w='98836' x='582' y='978'>
+              <zone h='98044' id='16' param='horz' type-v2='layout-flow' w='98836' x='582' y='978'>
+                <zone h='98044' id='14' type-v2='layout-basic' w='98836' x='582' y='978'>
+                  <!-- Upper Half: Target Countries & Active Campaigns -->
+                  <zone h='48000' id='3' name='Target Countries Threat Exposure' w='50345' x='582' y='978'>
+                    <zone-style>
+                      <format attr='border-color' value='#000000' />
+                      <format attr='border-style' value='none' />
+                      <format attr='border-width' value='0' />
+                      <format attr='margin' value='4' />
+                    </zone-style>
+                  </zone>
+                  <zone h='48000' id='5' name='Active Nation-State Threat Campaigns' w='48491' x='50927' y='978'>
+                    <zone-style>
+                      <format attr='border-color' value='#000000' />
+                      <format attr='border-style' value='none' />
+                      <format attr='border-width' value='0' />
+                      <format attr='margin' value='4' />
+                    </zone-style>
+                  </zone>
+                  <!-- Lower Half: Sector Vulnerability, Attack Vectors, Threat Origin -->
+                  <zone h='50000' id='6' name='Cross-Border Sector Vulnerability' w='38000' x='582' y='49000'>
+                    <zone-style>
+                      <format attr='border-color' value='#000000' />
+                      <format attr='border-style' value='none' />
+                      <format attr='border-width' value='0' />
+                      <format attr='margin' value='4' />
+                    </zone-style>
+                  </zone>
+                  <zone h='50000' id='7' name='Geopolitical Attack Vectors' w='34000' x='38582' y='49000'>
+                    <zone-style>
+                      <format attr='border-color' value='#000000' />
+                      <format attr='border-style' value='none' />
+                      <format attr='border-width' value='0' />
+                      <format attr='margin' value='4' />
+                    </zone-style>
+                  </zone>
+                  <zone h='50000' id='8' name='Threat Origin Nation-States' w='26836' x='72582' y='49000'>
+                    <zone-style>
+                      <format attr='border-color' value='#000000' />
+                      <format attr='border-style' value='none' />
+                      <format attr='border-width' value='0' />
+                      <format attr='margin' value='4' />
+                    </zone-style>
+                  </zone>
+                </zone>
+              </zone>
+            </zone>
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='none' />
+            <format attr='border-width' value='0' />
+            <format attr='margin' value='8' />
+          </zone-style>
+        </zone>
+      </zones>
+      <simple-id uuid='{6E91A64B-83C3-4876-8095-2451B08104E9}' />
+    </dashboard>
+  </dashboards>
+
+  <windows saved-dpi-scale-factor='1.5' source-height='44'>
+    <window class='worksheet' name='Target Countries Threat Exposure'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='30'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.threat_intel_datasource].[none:Target_Country:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{31AE71D1-2139-4C91-BBDF-308105740C4A}' />
+    </window>
+    <window class='worksheet' name='Active Nation-State Threat Campaigns'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='30'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.threat_intel_datasource].[none:Severity:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{103980CE-401A-4CD1-8F0E-92BB143438AE}' />
+    </window>
+    <window class='worksheet' name='Cross-Border Sector Vulnerability'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='30'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{AA570B28-40F1-4F41-8597-20BCA5702F10}' />
+    </window>
+    <window class='worksheet' name='Geopolitical Attack Vectors'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='30'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{BBE19875-9D22-4521-996A-12DF8097E25F}' />
+    </window>
+    <window class='worksheet' name='Threat Origin Nation-States'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='30'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{C0E2856A-413B-4409-91EF-206FA5076DB9}' />
+    </window>
+    <window class='dashboard' maximized='true' name='Global Cyber Threat Campaigns Dashboard'>
+      <viewpoints>
+        <viewpoint name='Target Countries Threat Exposure'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Active Nation-State Threat Campaigns'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Cross-Border Sector Vulnerability'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Geopolitical Attack Vectors'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Threat Origin Nation-States'>
+          <zoom type='entire-view' />
+        </viewpoint>
+      </viewpoints>
+      <active id='3' />
+      <simple-id uuid='{F293A92B-987B-4654-9721-394F890918EE}' />
+    </window>
+  </windows>
+  <thumbnails />
+</workbook>
