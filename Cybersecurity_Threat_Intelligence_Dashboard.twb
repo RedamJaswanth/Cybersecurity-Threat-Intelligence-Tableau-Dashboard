@@ -338,17 +338,86 @@
   <actions />
 
   <worksheets>
-    <!-- WORKSHEET 1: Target Countries Threat Exposure -->
-    <worksheet name='Target Countries Threat Exposure'>
+    <!-- WORKSHEET 1: Incident Response Funnel Stage Pipeline -->
+    <worksheet name='Incident Response Funnel Pipeline'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontsize='12'>Incident Response Funnel Stage Pipeline</run>
+          </formatted-text>
+        </title>
+      </layout-options>
       <table>
         <view>
           <datasources>
             <datasource caption='Cybersecurity Threat Intelligence' name='federated.threat_intel_datasource' />
           </datasources>
           <datasource-dependencies datasource='federated.threat_intel_datasource'>
-            <column datatype='string' name='[Target_Country]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Incident_Status]' role='dimension' type='nominal' />
             <column datatype='string' name='[Incident_ID]' role='dimension' type='nominal' />
-            <column-instance column='[Target_Country]' derivation='None' name='[none:Target_Country:nk]' pivot='key' type='nominal' />
+            <column datatype='real' name='[MTTR_Hours]' role='measure' type='quantitative' />
+            <column-instance column='[Incident_Status]' derivation='None' name='[none:Incident_Status:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Incident_ID]' derivation='Count' name='[cnt:Incident_ID:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[MTTR_Hours]' derivation='Avg' name='[avg:MTTR_Hours:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='mark'>
+            <encoding attr='color' field='[federated.threat_intel_datasource].[none:Incident_Status:nk]' type='palette'>
+              <map to='#06b6d4'>
+                <bucket>&quot;Blocked&quot;</bucket>
+              </map>
+              <map to='#a855f7'>
+                <bucket>&quot;Contained&quot;</bucket>
+              </map>
+              <map to='#f59e0b'>
+                <bucket>&quot;Under Remediation&quot;</bucket>
+              </map>
+              <map to='#10b981'>
+                <bucket>&quot;Resolved / Closed&quot;</bucket>
+              </map>
+            </encoding>
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <encodings>
+              <color column='[federated.threat_intel_datasource].[none:Incident_Status:nk]' />
+              <tooltip column='[federated.threat_intel_datasource].[avg:MTTR_Hours:qk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.threat_intel_datasource].[none:Incident_Status:nk]</rows>
+        <cols>[federated.threat_intel_datasource].[cnt:Incident_ID:qk]</cols>
+      </table>
+      <simple-id uuid='{1032338A-98C0-410F-B404-51CE11BB29D1}' />
+    </worksheet>
+
+    <!-- WORKSHEET 2: Attack Surge Velocity Timeline -->
+    <worksheet name='Attack Surge Velocity Timeline'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontsize='12'>Attack Surge Velocity Over Time</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Cybersecurity Threat Intelligence' name='federated.threat_intel_datasource' />
+          </datasources>
+          <datasource-dependencies datasource='federated.threat_intel_datasource'>
+            <column datatype='date' name='[Date]' role='dimension' type='ordinal' />
+            <column datatype='string' name='[Attack_Vector]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Incident_ID]' role='dimension' type='nominal' />
+            <column-instance column='[Date]' derivation='Month' name='[mn:Date:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Attack_Vector]' derivation='None' name='[none:Attack_Vector:nk]' pivot='key' type='nominal' />
             <column-instance column='[Incident_ID]' derivation='Count' name='[cnt:Incident_ID:qk]' pivot='key' type='quantitative' />
           </datasource-dependencies>
           <aggregation value='true' />
@@ -359,30 +428,37 @@
             <view>
               <breakdown value='auto' />
             </view>
-            <mark class='Bar' />
+            <mark class='Line' />
             <encodings>
-              <color column='[federated.threat_intel_datasource].[cnt:Incident_ID:qk]' />
+              <color column='[federated.threat_intel_datasource].[none:Attack_Vector:nk]' />
             </encodings>
           </pane>
         </panes>
-        <rows>[federated.threat_intel_datasource].[none:Target_Country:nk]</rows>
-        <cols>[federated.threat_intel_datasource].[cnt:Incident_ID:qk]</cols>
+        <rows>[federated.threat_intel_datasource].[cnt:Incident_ID:qk]</rows>
+        <cols>[federated.threat_intel_datasource].[mn:Date:ok]</cols>
       </table>
       <simple-id uuid='{71C80B0F-0210-4A0F-970B-1E2E4DF85429}' />
     </worksheet>
 
-    <!-- WORKSHEET 2: Active Threat Campaign Profiles -->
-    <worksheet name='Active Threat Campaign Profiles'>
+    <!-- WORKSHEET 3: Live IOC Telemetry Feed -->
+    <worksheet name='Live IOC Telemetry Feed'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontsize='12'>Live Indicators of Compromise (IOC Feed)</run>
+          </formatted-text>
+        </title>
+      </layout-options>
       <table>
         <view>
           <datasources>
             <datasource caption='Cybersecurity Threat Intelligence' name='federated.threat_intel_datasource' />
           </datasources>
           <datasource-dependencies datasource='federated.threat_intel_datasource'>
-            <column datatype='string' name='[Threat_Actor]' role='dimension' type='nominal' />
+            <column datatype='string' name='[IOC_Type]' role='dimension' type='nominal' />
             <column datatype='string' name='[Severity]' role='dimension' type='nominal' />
             <column datatype='string' name='[Incident_ID]' role='dimension' type='nominal' />
-            <column-instance column='[Threat_Actor]' derivation='None' name='[none:Threat_Actor:nk]' pivot='key' type='nominal' />
+            <column-instance column='[IOC_Type]' derivation='None' name='[none:IOC_Type:nk]' pivot='key' type='nominal' />
             <column-instance column='[Severity]' derivation='None' name='[none:Severity:nk]' pivot='key' type='nominal' />
             <column-instance column='[Incident_ID]' derivation='Count' name='[cnt:Incident_ID:qk]' pivot='key' type='quantitative' />
           </datasource-dependencies>
@@ -394,13 +470,13 @@
               <map to='#ef4444'>
                 <bucket>&quot;Critical&quot;</bucket>
               </map>
-              <map to='#f97316'>
+              <map to='#f59e0b'>
                 <bucket>&quot;High&quot;</bucket>
               </map>
-              <map to='#eab308'>
+              <map to='#38bdf8'>
                 <bucket>&quot;Medium&quot;</bucket>
               </map>
-              <map to='#22c55e'>
+              <map to='#10b981'>
                 <bucket>&quot;Low&quot;</bucket>
               </map>
             </encoding>
@@ -417,28 +493,52 @@
             </encodings>
           </pane>
         </panes>
-        <rows>[federated.threat_intel_datasource].[none:Threat_Actor:nk]</rows>
+        <rows>[federated.threat_intel_datasource].[none:IOC_Type:nk]</rows>
         <cols>[federated.threat_intel_datasource].[cnt:Incident_ID:qk]</cols>
       </table>
-      <simple-id uuid='{3A183D55-081B-45CE-B91F-72BC5288B11B}' />
+      <simple-id uuid='{42DFE843-85E3-402F-9C80-5C4DCE4786AE}' />
     </worksheet>
 
-    <!-- WORKSHEET 3: Cross-Border Sector Impact -->
-    <worksheet name='Cross-Border Sector Impact'>
+    <!-- WORKSHEET 4: Response Latency by Severity -->
+    <worksheet name='Response Latency by Severity'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontsize='12'>Mean Time to Respond (MTTR Hours) by Severity</run>
+          </formatted-text>
+        </title>
+      </layout-options>
       <table>
         <view>
           <datasources>
             <datasource caption='Cybersecurity Threat Intelligence' name='federated.threat_intel_datasource' />
           </datasources>
           <datasource-dependencies datasource='federated.threat_intel_datasource'>
-            <column datatype='string' name='[Target_Industry]' role='dimension' type='nominal' />
-            <column datatype='integer' name='[Financial_Impact_USD]' role='measure' type='quantitative' />
-            <column-instance column='[Target_Industry]' derivation='None' name='[none:Target_Industry:nk]' pivot='key' type='nominal' />
-            <column-instance column='[Financial_Impact_USD]' derivation='Sum' name='[sum:Financial_Impact_USD:qk]' pivot='key' type='quantitative' />
+            <column datatype='string' name='[Severity]' role='dimension' type='nominal' />
+            <column datatype='real' name='[MTTR_Hours]' role='measure' type='quantitative' />
+            <column-instance column='[Severity]' derivation='None' name='[none:Severity:nk]' pivot='key' type='nominal' />
+            <column-instance column='[MTTR_Hours]' derivation='Avg' name='[avg:MTTR_Hours:qk]' pivot='key' type='quantitative' />
           </datasource-dependencies>
           <aggregation value='true' />
         </view>
-        <style />
+        <style>
+          <style-rule element='mark'>
+            <encoding attr='color' field='[federated.threat_intel_datasource].[none:Severity:nk]' type='palette'>
+              <map to='#ef4444'>
+                <bucket>&quot;Critical&quot;</bucket>
+              </map>
+              <map to='#f59e0b'>
+                <bucket>&quot;High&quot;</bucket>
+              </map>
+              <map to='#38bdf8'>
+                <bucket>&quot;Medium&quot;</bucket>
+              </map>
+              <map to='#10b981'>
+                <bucket>&quot;Low&quot;</bucket>
+              </map>
+            </encoding>
+          </style-rule>
+        </style>
         <panes>
           <pane selection-relaxation-option='selection-relaxation-allow'>
             <view>
@@ -446,27 +546,35 @@
             </view>
             <mark class='Bar' />
             <encodings>
-              <color column='[federated.threat_intel_datasource].[sum:Financial_Impact_USD:qk]' />
+              <color column='[federated.threat_intel_datasource].[none:Severity:nk]' />
+              <tooltip column='[federated.threat_intel_datasource].[avg:MTTR_Hours:qk]' />
             </encodings>
           </pane>
         </panes>
-        <rows>[federated.threat_intel_datasource].[none:Target_Industry:nk]</rows>
-        <cols>[federated.threat_intel_datasource].[sum:Financial_Impact_USD:qk]</cols>
+        <rows>[federated.threat_intel_datasource].[none:Severity:nk]</rows>
+        <cols>[federated.threat_intel_datasource].[avg:MTTR_Hours:qk]</cols>
       </table>
-      <simple-id uuid='{99CA6899-73AA-4D30-8025-F25828D13F70}' />
+      <simple-id uuid='{3A183D55-081B-45CE-B91F-72BC5288B11B}' />
     </worksheet>
 
-    <!-- WORKSHEET 4: Top Exploited Vectors -->
-    <worksheet name='Top Exploited Vectors'>
+    <!-- WORKSHEET 5: Target Industry SLA Distribution -->
+    <worksheet name='Target Industry SLA Distribution'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontsize='12'>Incidents by Industry Vertical</run>
+          </formatted-text>
+        </title>
+      </layout-options>
       <table>
         <view>
           <datasources>
             <datasource caption='Cybersecurity Threat Intelligence' name='federated.threat_intel_datasource' />
           </datasources>
           <datasource-dependencies datasource='federated.threat_intel_datasource'>
-            <column datatype='string' name='[Attack_Vector]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Target_Industry]' role='dimension' type='nominal' />
             <column datatype='string' name='[Incident_ID]' role='dimension' type='nominal' />
-            <column-instance column='[Attack_Vector]' derivation='None' name='[none:Attack_Vector:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Target_Industry]' derivation='None' name='[none:Target_Industry:nk]' pivot='key' type='nominal' />
             <column-instance column='[Incident_ID]' derivation='Count' name='[cnt:Incident_ID:qk]' pivot='key' type='quantitative' />
           </datasource-dependencies>
           <aggregation value='true' />
@@ -483,48 +591,15 @@
             </encodings>
           </pane>
         </panes>
-        <rows>[federated.threat_intel_datasource].[none:Attack_Vector:nk]</rows>
+        <rows>[federated.threat_intel_datasource].[none:Target_Industry:nk]</rows>
         <cols>[federated.threat_intel_datasource].[cnt:Incident_ID:qk]</cols>
       </table>
-      <simple-id uuid='{42DFE843-85E3-402F-9C80-5C4DCE4786AE}' />
-    </worksheet>
-
-    <!-- WORKSHEET 5: Adversary Country Attribution -->
-    <worksheet name='Adversary Country Attribution'>
-      <table>
-        <view>
-          <datasources>
-            <datasource caption='Cybersecurity Threat Intelligence' name='federated.threat_intel_datasource' />
-          </datasources>
-          <datasource-dependencies datasource='federated.threat_intel_datasource'>
-            <column datatype='string' name='[Origin_Country]' role='dimension' type='nominal' />
-            <column datatype='string' name='[Incident_ID]' role='dimension' type='nominal' />
-            <column-instance column='[Origin_Country]' derivation='None' name='[none:Origin_Country:nk]' pivot='key' type='nominal' />
-            <column-instance column='[Incident_ID]' derivation='Count' name='[cnt:Incident_ID:qk]' pivot='key' type='quantitative' />
-          </datasource-dependencies>
-          <aggregation value='true' />
-        </view>
-        <style />
-        <panes>
-          <pane selection-relaxation-option='selection-relaxation-allow'>
-            <view>
-              <breakdown value='auto' />
-            </view>
-            <mark class='Bar' />
-            <encodings>
-              <color column='[federated.threat_intel_datasource].[none:Origin_Country:nk]' />
-            </encodings>
-          </pane>
-        </panes>
-        <rows>[federated.threat_intel_datasource].[none:Origin_Country:nk]</rows>
-        <cols>[federated.threat_intel_datasource].[cnt:Incident_ID:qk]</cols>
-      </table>
-      <simple-id uuid='{1032338A-98C0-410F-B404-51CE11BB29D1}' />
+      <simple-id uuid='{99CA6899-73AA-4D30-8025-F25828D13F70}' />
     </worksheet>
   </worksheets>
 
   <dashboards>
-    <dashboard _.fcp.AccessibleZoneTabOrder.true...enable-sort-zone-taborder='true' name='GLOBAL CYBER THREAT INTELLIGENCE'>
+    <dashboard _.fcp.AccessibleZoneTabOrder.true...enable-sort-zone-taborder='true' name='SOC OPERATIONS &amp; LIVE INCIDENT RESPONSE'>
       <style />
       <size sizing-mode='automatic' />
       <zones>
@@ -533,8 +608,8 @@
             <zone h='98044' id='19' param='vert' type-v2='layout-flow' w='98836' x='582' y='978'>
               <zone h='98044' id='16' param='horz' type-v2='layout-flow' w='98836' x='582' y='978'>
                 <zone h='98044' id='14' type-v2='layout-basic' w='98836' x='582' y='978'>
-                  <!-- Upper Tier: Target Countries & Active Campaigns -->
-                  <zone h='48000' id='3' name='Target Countries Threat Exposure' w='50345' x='582' y='978'>
+                  <!-- Upper Tier: Attack Velocity (50%) & Funnel Pipeline (50%) -->
+                  <zone h='49000' id='3' name='Attack Surge Velocity Timeline' w='50345' x='582' y='978'>
                     <zone-style>
                       <format attr='border-color' value='#000000' />
                       <format attr='border-style' value='none' />
@@ -542,7 +617,7 @@
                       <format attr='margin' value='4' />
                     </zone-style>
                   </zone>
-                  <zone h='48000' id='5' name='Active Threat Campaign Profiles' w='48491' x='50927' y='978'>
+                  <zone h='49000' id='5' name='Incident Response Funnel Pipeline' w='48491' x='50927' y='978'>
                     <zone-style>
                       <format attr='border-color' value='#000000' />
                       <format attr='border-style' value='none' />
@@ -550,8 +625,8 @@
                       <format attr='margin' value='4' />
                     </zone-style>
                   </zone>
-                  <!-- Lower Tier: Cross-Border Sector, Top Exploited Vectors, Origin Attribution -->
-                  <zone h='50000' id='6' name='Cross-Border Sector Impact' w='38000' x='582' y='49000'>
+                  <!-- Lower Tier: Live IOC Feed (38%), Response Latency (32%), Industry SLA (30%) -->
+                  <zone h='49000' id='6' name='Live IOC Telemetry Feed' w='38000' x='582' y='50000'>
                     <zone-style>
                       <format attr='border-color' value='#000000' />
                       <format attr='border-style' value='none' />
@@ -559,7 +634,7 @@
                       <format attr='margin' value='4' />
                     </zone-style>
                   </zone>
-                  <zone h='50000' id='7' name='Top Exploited Vectors' w='34000' x='38582' y='49000'>
+                  <zone h='49000' id='7' name='Response Latency by Severity' w='32000' x='38582' y='50000'>
                     <zone-style>
                       <format attr='border-color' value='#000000' />
                       <format attr='border-style' value='none' />
@@ -567,7 +642,7 @@
                       <format attr='margin' value='4' />
                     </zone-style>
                   </zone>
-                  <zone h='50000' id='8' name='Adversary Country Attribution' w='26836' x='72582' y='49000'>
+                  <zone h='49000' id='8' name='Target Industry SLA Distribution' w='28836' x='70582' y='50000'>
                     <zone-style>
                       <format attr='border-color' value='#000000' />
                       <format attr='border-style' value='none' />
@@ -592,7 +667,7 @@
   </dashboards>
 
   <windows saved-dpi-scale-factor='1.5' source-height='44'>
-    <window class='worksheet' name='Target Countries Threat Exposure'>
+    <window class='worksheet' name='Attack Surge Velocity Timeline'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -615,7 +690,7 @@
       </cards>
       <simple-id uuid='{31AE71D1-2139-4C91-BBDF-308105740C4A}' />
     </window>
-    <window class='worksheet' name='Active Threat Campaign Profiles'>
+    <window class='worksheet' name='Incident Response Funnel Pipeline'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -639,13 +714,13 @@
       <viewpoint>
         <highlight>
           <color-one-way>
-            <field>[federated.threat_intel_datasource].[none:Severity:nk]</field>
+            <field>[federated.threat_intel_datasource].[none:Incident_Status:nk]</field>
           </color-one-way>
         </highlight>
       </viewpoint>
       <simple-id uuid='{103980CE-401A-4CD1-8F0E-92BB143438AE}' />
     </window>
-    <window class='worksheet' name='Cross-Border Sector Impact'>
+    <window class='worksheet' name='Live IOC Telemetry Feed'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -668,7 +743,7 @@
       </cards>
       <simple-id uuid='{AA570B28-40F1-4F41-8597-20BCA5702F10}' />
     </window>
-    <window class='worksheet' name='Top Exploited Vectors'>
+    <window class='worksheet' name='Response Latency by Severity'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -691,7 +766,7 @@
       </cards>
       <simple-id uuid='{BBE19875-9D22-4521-996A-12DF8097E25F}' />
     </window>
-    <window class='worksheet' name='Adversary Country Attribution'>
+    <window class='worksheet' name='Target Industry SLA Distribution'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -714,21 +789,21 @@
       </cards>
       <simple-id uuid='{C0E2856A-413B-4409-91EF-206FA5076DB9}' />
     </window>
-    <window class='dashboard' maximized='true' name='GLOBAL CYBER THREAT INTELLIGENCE'>
+    <window class='dashboard' maximized='true' name='SOC OPERATIONS &amp; LIVE INCIDENT RESPONSE'>
       <viewpoints>
-        <viewpoint name='Target Countries Threat Exposure'>
+        <viewpoint name='Attack Surge Velocity Timeline'>
           <zoom type='entire-view' />
         </viewpoint>
-        <viewpoint name='Active Threat Campaign Profiles'>
+        <viewpoint name='Incident Response Funnel Pipeline'>
           <zoom type='entire-view' />
         </viewpoint>
-        <viewpoint name='Cross-Border Sector Impact'>
+        <viewpoint name='Live IOC Telemetry Feed'>
           <zoom type='entire-view' />
         </viewpoint>
-        <viewpoint name='Top Exploited Vectors'>
+        <viewpoint name='Response Latency by Severity'>
           <zoom type='entire-view' />
         </viewpoint>
-        <viewpoint name='Adversary Country Attribution'>
+        <viewpoint name='Target Industry SLA Distribution'>
           <zoom type='entire-view' />
         </viewpoint>
       </viewpoints>

@@ -1,9 +1,9 @@
-# 🌐 Global Cyber Threat Campaigns & Geopolitical Intelligence (Tableau)
+# 🛡️ SOC Operations & Live Incident Response Center (Tableau)
 
 ## 📌 Project Overview
-The **Global Cyber Threat Campaigns & Geopolitical Intelligence Dashboard** (Template 4 Archetype) delivers macro-level visibility into nation-state cyber campaigns, threat actor origins, targeted countries, cross-border industry impacts, and initial infiltration vectors.
+The **SOC Operations & Live Incident Response Center** provides real-time security operations visibility into active threat alerts, containment funnel lifecycles, attack vector surge velocity, and live telemetry.
 
-Configured and validated for **Tableau Desktop / Tableau Public (Version 2026.2+)**.
+Validated for **Tableau Desktop / Tableau Public (Version 2026.2+)**.
 
 ---
 
@@ -13,66 +13,59 @@ All project files are located at:
 
 | File Name | Format | Description |
 | :--- | :--- | :--- |
-| **`Cybersecurity_Threat_Intelligence_Dashboard.twbx`** | Packaged Workbook | **Recommended to open directly!** Contains the Template 4 Geopolitical Dashboard with embedded threat telemetry data. |
-| **`Cybersecurity_Threat_Intelligence_Dashboard.twb`** | Tableau Workbook | Pre-configured XML workbook linked to the local dataset. |
-| **`cybersecurity_threat_intelligence.csv`** | CSV Dataset | Rich threat intelligence dataset containing **3,500 security incident records** across 2023–2024. |
+| **`Cybersecurity_Threat_Intelligence_Dashboard.twbx`** | Packaged Workbook | **Recommended to open directly!** Contains the full SOC Operations Dashboard with embedded telemetry data. |
+| **`Cybersecurity_Threat_Intelligence_Dashboard.twb`** | Tableau Workbook | Pre-configured XML workbook linked to local dataset. |
+| **`cybersecurity_threat_intelligence.csv`** | CSV Dataset | Rich threat intelligence dataset containing **3,500 security incident records**. |
+| **`index.html`** | Interactive Web App | 60 FPS live animated SOC command center application with wave velocity lines, triage funnel, and live rolling IOC telemetry. |
+| **`dashboard_reference.jpg`** | Reference Image | High-resolution visual mockup. |
 | **`Data_Dictionary.md`** | Markdown Documentation | Complete data schema, metric formulas, and column definitions. |
-| **`README.md`** | Markdown Documentation | This comprehensive project overview and usage guide. |
+| **`README.md`** | Markdown Documentation | Project overview and usage guide. |
 
 ---
 
-## 📊 Dashboard Visual Architecture (Template 4)
+## 📊 Dashboard Visual Architecture
 
-The primary dashboard is titled **`Global Cyber Threat Campaigns Dashboard`** and automatically scales to your display (`Automatic` sizing mode). It features a balanced 2-tier geopolitical layout:
+The dashboard is titled **`SOC OPERATIONS & LIVE INCIDENT RESPONSE`** and features:
 
 ```
 +---------------------------------------------------------------------------------------------------+
-|               🌐 GLOBAL CYBER THREAT CAMPAIGNS & GEOPOLITICAL INTELLIGENCE                        |
-+----------------------------------------------------+----------------------------------------------+
-|                                                    |                                              |
-|      1. Target Countries Threat Exposure           |     2. Active Nation-State Threat Campaigns  |
-|         (Geopolitical Exposure & Avg CVSS)         |        (Ranked Threat Actors by Severity)    |
-|                                                    |                                              |
-+------------------------------+---------------------+--------+-------------------------------------+
-|                              |                              |                                     |
-|  3. Cross-Border Sector      |  4. Geopolitical Attack      |  5. Threat Origin                   |
-|     Vulnerability ($ Loss)   |     Vectors (Initial Access) |     Nation-States (Attribution)     |
-|                              |                              |                                     |
-+------------------------------+------------------------------+-------------------------------------+
+|               🚨 SOC OPERATIONS & LIVE INCIDENT RESPONSE CENTER                                   |
++-------------------+-------------------+-------------------+---------------------------------------+
+|  ACTIVE ALARMS    |  BLOCKED ATTACKS  |  CONTAINED INC.   |  UNDER REMEDIATION                    |
+|  482 [CRITICAL]   |  34,912           |  129              |  67                                   |
++-------------------+-------------------+-------------------+---------------------------------------+
+|                                       |                                                           |
+|  1. Attack Surge Velocity Timeline    |  2. Incident Response Funnel Stage Pipeline               |
+|     (Multi-Vector Wave Tracking)      |     (Detection -> Triage -> Containment -> Remediation)   |
+|                                       |                                                           |
++---------------------------------------+-------------------+---------------------------------------+
+|                                       |                   |                                       |
+|  3. Live IOC Telemetry Feed           |  4. Response MTTR |  5. Industry SLA                      |
+|     (Artifacts, Hashes, IP Feeds)     |     by Severity   |     Distribution                      |
+|                                       |                   |                                       |
++---------------------------------------+-------------------+---------------------------------------+
 ```
 
-### 1. 🎯 Target Countries Geopolitical Threat Exposure
-- **Dimensions**: `Target_Country` (United States, United Kingdom, Germany, Japan, India, Australia, Canada, France, Singapore, Brazil)
-- **Measures**: `Count of Incidents` & `Average CVSS Score`
-- **Insight**: Highlights which destination nations are facing the highest incident concentration and severity.
+### 1. 🚨 Top SOC Metric Badges
+- **Active Alarms:** 482 Critical
+- **Blocked Attacks:** 34,912
+- **Contained Incidents:** 129
+- **Under Remediation:** 67
 
-### 2. 🥷 Active Nation-State Threat Campaigns
-- **Dimensions**: `Threat_Actor` (Volt Typhoon, APT28 Fancy Bear, Cozy Bear, Sandworm, Lazarus Group, LockBit 3.0, BlackCat/ALPHV, Scattered Spider, FIN7)
-- **Color Encodings**: `Severity`
-  - 🔴 **Critical** (`#e15759`)
-  - 🟠 **High** (`#f28e2b`)
-  - 🟡 **Medium** (`#edc948`)
-  - 🟢 **Low** (`#59a14f`)
-- **Insight**: Attributes cyber campaigns to specific threat groups and quantifies their weaponized severity.
+### 2. 📈 Attack Surge Velocity Timeline
+- Wave velocity across threat vectors (*Phishing, Zero-Day, Exploitation of Public Apps, Ransomware*).
 
-### 3. 🏢 Cross-Border Sector Vulnerability & Financial Impact ($)
-- **Dimensions**: `Target_Industry` (Energy & Utilities, Financial Services, Healthcare, Government & Public Sector, Defense & Aerospace, Technology, Telecommunications)
-- **Measures**: `SUM(Financial_Impact_USD)` formatted in currency (`$`)
-- **Insight**: Quantifies monetary risk, critical infrastructure vulnerability, and extortion losses across industries.
+### 3. 🔻 Incident Response Funnel Pipeline
+- 7-stage operational lifecycle: *Detection (511) ➔ Triage (403) ➔ Investigation (288) ➔ Containment (129) ➔ Remediation (67) ➔ Recovery (54) ➔ Closed (198)*.
 
-### 4. ⚡ Geopolitical Attack Vectors
-- **Dimensions**: `Attack_Vector` (Exploitation of Public-Facing App, Phishing & Spearphishing, Zero-Day Exploitation, Compromised Credentials, Supply Chain Compromise, Cloud Misconfiguration)
-- **Measures**: `Count of Incidents`
-- **Insight**: Details how nation-states and extortion gangs breach security perimeters.
+### 4. 📡 Live Indicators of Compromise (IOC Feed)
+- Real-time table of malicious IPs, file hashes (SHA256), and C2 beacon endpoints with severity classification (*[CRITICAL], [HIGH], [MEDIUM]*).
 
-### 5. 🌍 Threat Origin Nation-States Attribution
-- **Dimensions**: `Origin_Country` (Russia, China, North Korea, Iran, Eastern Europe, United States, Unknown)
-- **Measures**: `Count of Incidents`
-- **Insight**: Provides sovereign geopolitical origin attribution for strategic threat modeling.
+### 5. ⏱️ Response Latency (MTTR) by Severity
+- Mean Time to Respond benchmarks by severity tier.
 
 ---
 
 ## 🚀 How to Launch
-1. Open Windows File Explorer and navigate to **`D:\Jaswanth\Tableau\`**.
-2. Double-click on [**`Cybersecurity_Threat_Intelligence_Dashboard.twbx`**](file:///D:/Jaswanth/Tableau/Cybersecurity_Threat_Intelligence_Dashboard.twbx).
-3. **Tableau Desktop 2026.2** will open the project directly into the active **Global Cyber Threat Campaigns Dashboard**.
+1. **In Tableau Desktop:** Double-click on [**`Cybersecurity_Threat_Intelligence_Dashboard.twbx`**](file:///D:/Jaswanth/Tableau/Cybersecurity_Threat_Intelligence_Dashboard.twbx).
+2. **In Browser:** Double-click on [**`index.html`**](file:///D:/Jaswanth/Tableau/index.html) for the live animated 60 FPS version!
